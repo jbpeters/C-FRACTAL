@@ -11,6 +11,7 @@
 //
 //Date August 2015
 //     simplified pallet formula  w= _c*pi/max_itr    d=w(k)*max_itr+pi  now is same as python palette see "pyfractal"
+//
 #define INCLUDE_PNG_SUPPORT 1
 #include<iostream>
 #include<cmath>
@@ -35,7 +36,6 @@ int main ( int argc , char * argv[])
 // arg usage:
     if( argc != 13 )
     {
-
         Usage( argc, argv[0]) ;
         return 1;
     }//if.end
