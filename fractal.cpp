@@ -25,17 +25,15 @@ using namespace std;
 int Usage(char * name);
 
 //Function Defn.
-int Usage(int count , char * name)
-{
+int Usage(int count , char * name) {
     cout<<"  usage: "<<name<<" ScreenSize[widthxheight]  plot-type[ X | P ] "<<"Set-type[ M | J ] "<<"x y ip.real ip.imag radius  _red _green _blue  #iterations"<<endl;
     return 1;
 }//end.Usage ;
 
-int main ( int argc , char * argv[])
-{
+int main ( int argc , char * argv[]) {
+
 // arg usage:
-    if( argc != 13 )
-    {
+    if( argc != 13 )    {
         Usage( argc, argv[0]) ;
         return 1;
     }//if.end
@@ -60,34 +58,26 @@ int main ( int argc , char * argv[])
     float y_screen       =      atof (height.c_str());
     string pic_name;
 
-    if ( r <= 0.0 )
-    {
+    if ( r <= 0.0 )    {
         cerr<< "Negative radius!!"<< endl;
         return 1;
     }
     long double a,b;
-    if (x_screen>y_screen)
-    {
+    if (x_screen>y_screen)    {
         b=r;
         a=r*x_screen/y_screen;
     }
-    else if (y_screen>x_screen)
-    {
+    else if (y_screen>x_screen)    {
         a=r;
         b=r*y_screen/x_screen;
         string picname;
-    }
-    else
-    {
+    }  else     {
         a =  b = r;
     }
     double fudge;
-    if ( strcmp(plot ,"X") == 0 )
-    {
+    if ( strcmp(plot ,"X") == 0 )    {
         fudge=1.0;
-    }
-    else
-    {
+    } else {
         fudge=1.0;
     }
     double x_gauge = 2*fudge*a/x_screen;
@@ -102,8 +92,7 @@ int main ( int argc , char * argv[])
     Plotter  *graphic;
 
     ofstream somefile;
-    if ( !strcmp( plot, "P")  )
-    {
+    if ( !strcmp( plot, "P")  )    {
         string spc = "_";
         string png = ".png";
         pic_name  = type + spc;
@@ -124,18 +113,15 @@ int main ( int argc , char * argv[])
         somefile.open( pic_name.c_str() , ios::out );
 
         graphic = new   PNGPlotter(cin, somefile, cerr, params );
-        if ( graphic->openpl() < 0)
-        {
+        if ( graphic->openpl() < 0)         {
             cerr<<"Couldn't open Plotter"<<endl;
             return 1;
         }
     }
 
-    if ( !strcmp( plot, "X" ) )
-    {
+    if ( !strcmp( plot, "X" ) )    {
         graphic = new XPlotter(cin, cout, cerr, params) ;
-        if ( graphic->openpl() < 0)
-        {
+        if ( graphic->openpl() < 0)         {
             cerr<<"Couldn't open Plotter"<<endl;
             return 1;
         }
@@ -157,8 +143,7 @@ int main ( int argc , char * argv[])
     int green[max_itr] ;
     int  blue[max_itr] ;
 //  cout<<"after ARRAY"<<endl;
-    for(long long unsigned int i=0; i<=max_itr; i++)
-    {
+    for(long long unsigned int i=0; i<=max_itr; i++) {
         red[i]    = (long long int) (vmax/2.0 * ( 1 + cos( omega_r * i - delta_r )));
         green[i]  = (long long int) (vmax/2.0 * ( 1 + cos( omega_g * i - delta_g )));
         blue[i]   = (long long int) (vmax/2.0 * ( 1 + cos( omega_b * i - delta_b )));
@@ -167,22 +152,18 @@ int main ( int argc , char * argv[])
     graphic->fspace(cx-fudge*a,cy-fudge*b,cx+fudge*a,cy+fudge*b);
     graphic->fcircle(cx,cy,r);
     graphic->fcircle(cx,cy,r/10);
-    for (double  row=cy-b; row<cy+b ; row += y_gauge ) //cy-h/2 ;cy+h2/ ; row += y_guage
-    {
-        for (double col=cx-a ; col< cx+a ; col += x_gauge )
-        {
+    for (double  row=cy-b; row<cy+b ; row += y_gauge ){ //cy-h/2 ;cy+h2/ ; row += y_guage
+        for (double col=cx-a ; col< cx+a ; col += x_gauge ){
             double d = 0;
             double zr=0,zi=0,nzr=0,nzi=0;
             double cr=0,ci=0;
-            if (!strcmp(type, "M")) // mandelbrot
-            {
+            if (!strcmp(type, "M")) { // mandelbrot
                 zr = 0 ;   //real(z) = 0.0
                 zi = 0 ;   //imag(z) = 0.0;
                 cr = col ; //real(c) = col;
                 ci = row ; //imag(c) = row;
             }
-            else if ( !strcmp(type,"J"))// julia
-            {
+            else if ( !strcmp(type,"J")) { // julia
                 zr = col; //real(z) = col ;
                 zi = row; //imag(z) = row ;
                 cr = ip_r; //c = ip;           //iteration parameter
@@ -190,8 +171,7 @@ int main ( int argc , char * argv[])
             }
             long long unsigned int count=0;
 
-            while ( d<4   && count< max_itr )
-            {
+            while ( d<4   && count< max_itr ){ 
                 nzr = zr*zr - zi*zi+ cr;   //z = pow(z,2) + c;
                 nzi = 2*zr*zi + ci;
                 d = nzr*nzr+nzi*nzi;
@@ -204,8 +184,7 @@ int main ( int argc , char * argv[])
         }
     }
 //close plotter
-    if ( graphic->closepl() < 0 )
-    {
+    if ( graphic->closepl() < 0 ){
         cerr<<"Coulden't close Plotter"<<endl;
         return 1;
     }
