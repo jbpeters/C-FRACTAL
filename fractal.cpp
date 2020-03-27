@@ -4,13 +4,15 @@
 //Author:Jeff Peters
 //Date: September 2006 ~ April 2007
 //
-// -  to compile g++ -lplotter -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11 -lm  -ofractal fractal.cpp
+//to compile: g++ -lplotter -lXaw -lXmu -lXt -lSM -lICE -lXext -lX11 -lm  -ofractal fractal.cpp
 //
-// Date: February 2013
+//Date: February 2013
 //     built on code::blocks 10.05 IDE
 //
 //Date August 2015
-//     simplified pallet formula  w= _c*pi/max_itr    d=w(k)*max_itr+pi  now is same as python palette see "pyfractal"
+//     simplified pallet formula  w = _c*pi/max_itr  
+//                                d = w(k)*max_itr+pi  
+//     now is same as python palette see "pyfractal"
 //
 #define INCLUDE_PNG_SUPPORT 1
 #include<iostream>
@@ -45,7 +47,7 @@ int main ( int argc , char * argv[]) {
     long double cy       = atof(argv[5]) ;
     double ip_r          = atof(argv[6]) ;  // real iteration parameter; is 0 for M'brot
     double ip_i          = atof(argv[7]) ;  // imag iteration parameter; is 0 for M'brot
-    long double r        = atof(argv[8]) ;
+    long double r        = atof(argv[8]) ;  //radius
     double _r            = atof(argv[9]) ;  // red parameter
     double _g            = atof(argv[10]);  // green parameter
     double _b            = atof(argv[11]);  // blue parameter
